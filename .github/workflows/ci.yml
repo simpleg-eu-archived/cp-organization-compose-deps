@@ -24,6 +24,6 @@ jobs:
           MONGO_INITDB_ROOT_PASSWORD: "guest"
           RABBITMQ_DEFAULT_USER: "guest"
           RABBITMQ_DEFAULT_PASS: "guest"
-          MONGODB_CONNECTION_URI: "mongodb://mongodb:27017"
+          MONGODB_CONNECTION_URI: "mongodb://127.0.0.1:27017"
           MONGODB_USERNAME: "guest"
           MONGODB_PASSWORD: "guest"
