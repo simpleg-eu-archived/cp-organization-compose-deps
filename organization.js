@@ -1,4 +1,4 @@
-db = db.getSiblingDB("cuplan");
+db = db.getSiblingDB("cp_organization");
 
 db.organization.insertOne(
     {
