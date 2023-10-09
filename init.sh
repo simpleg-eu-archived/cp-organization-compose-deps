@@ -4,10 +4,17 @@ sudo docker compose up -d
 
 sleep 5s
 
-curl https://downloads.mongodb.com/compass/mongosh-1.10.6-linux-x64.tgz --output mongosh.tgz
-tar -zxvf mongosh.tgz
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    curl https://downloads.mongodb.com/compass/mongosh-2.0.1-linux-x64.tgz --output mongosh.tgz
+    tar -zxvf mongosh.tgz
 
-mv mongosh-1.10.6-linux-x64/bin/* ./
+    mv mongosh-2.0.1-linux-x64/bin/* ./
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    curl https://downloads.mongodb.com/compass/mongosh-2.0.1-darwin-arm64.zip --output mongosh.zip
+    unzip -o mongosh.zip
+
+    mv mongosh-2.0.1-darwin-arm64/bin/* ./
+fi
 
 chmod +x mongosh
-./mongosh $1 --username $2 --password $3 --file organization_permission.js --file organization.js --file role.js --file member.js --file invitation_code.js
+./mongosh $CP_ORGANIZATION_MONGODB_CONNECTION_URI --username $CP_ORGANIZATION_MONGODB_USERNAME --password $CP_ORGANIZATION_MONGODB_PASSWORD --file organization_permission.js --file organization.js --file role.js --file member.js --file invitation_code.js
