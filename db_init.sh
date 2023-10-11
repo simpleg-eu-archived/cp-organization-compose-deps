@@ -1,5 +1,10 @@
 #!/bin/bash
 
+
+CP_ORGANIZATION_MONGODB_CONNECTION_URI=$(bws secret get "$CP_ORGANIZATION_MONGODB_CONNECTION_URI_SECRET" --access-token "$SECRETS_MANAGER_ACCESS_TOKEN" | jq -r '.value')
+CP_ORGANIZATION_MONGODB_USERNAME=$(bws secret get "$CP_ORGANIZATION_MONGODB_USERNAME_SECRET" --access-token "$SECRETS_MANAGER_ACCESS_TOKEN" | jq -r '.value')
+CP_ORGANIZATION_MONGODB_PASSWORD=$(bws secret get "$CP_ORGANIZATION_MONGODB_PASSWORD_SECRET" --access-token "$SECRETS_MANAGER_ACCESS_TOKEN" | jq -r '.value')
+
 if [ ! -f ./mongosh ]; then
     if [[ "$OSTYPE" == "linux-gnu"* ]]; then
         curl https://downloads.mongodb.com/compass/mongosh-2.0.1-linux-x64.tgz --output mongosh.tgz
